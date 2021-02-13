@@ -293,7 +293,10 @@ function applyStyleActiveLayer(style, autoResize) {
 function adjustFontSizeActiveLayer(modifier) {
 	var textItem = activeDocument.activeLayer.textItem;
 	var fontSize = textItem.size;
-	textItem.size = getAdjustedSize(parseInt(fontSize) + parseInt(modifier)) + 'px';
+	var leadingSize = textItem.leading;
+	textItem.size = getAdjustedSize(Math.round(parseFloat(parseFloat(fontSize) * parseFloat(modifier)))) + 'px';
+	textItem.leading = getAdjustedSize(Math.round(parseFloat(parseFloat(leadingSize) * parseFloat(modifier)))) + 'px';
+	return actionSelectedLayers('resizeActiveLayer', 'Auto resize');
 }
 
 function roundFontSizeActiveLayer() {
